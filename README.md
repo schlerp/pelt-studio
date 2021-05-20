@@ -4,7 +4,9 @@ The **P**ython **E**xtract, **L**oad, **T**ransform Studio is an application for
 
 ![PELT Studio example ELT dataflow](./peltstudio_example_flow.png)
 
-The above diagram serves as a basic explaination of what the MVC for this app strives to achieve.
+The above diagram serves as a basic explaination of what the MVC for this app strives to achieve. Current progress is shown below:
+
+![PELT Studio pre alpha interface](./peltstudio_pre_alpha.png)
 
 ## Usage
 
