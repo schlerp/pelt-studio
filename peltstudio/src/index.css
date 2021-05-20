@@ -1,0 +1,201 @@
+@import url(https://cdn.jsdelivr.net/gh/tonsky/FiraCode@5.2/distr/fira_code.css);
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.flowdesigner {
+  flex-direction: column;
+  display: flex;
+  /* height: calc(100% - 64px); */
+  height: 100%;
+}
+
+.flowdesigner aside {
+  border-right: 1px solid #eee;
+  padding-top: calc(15px + 64px);
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+  background: #faf8fa;
+}
+
+.flowdesigner aside .description {
+  margin-bottom: 10px;
+}
+
+.flowdesigner .flownode {
+  height: 20px;
+  padding: 4px;
+  border: 1px dashed #1a192b;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  background-color: #ffffff;
+}
+
+.flowdesigner .flownode.source {
+  border-color: #0041d0;
+  color: #0041d0 !important;
+}
+
+.flowdesigner .flownode.target {
+  border-color: #ff0072;
+  color: #ff0072 !important;
+}
+
+.flowdesigner .flownode.staging {
+  border-color: #0c940c;
+  color: #0c940c !important;
+}
+
+.flowdesigner .flownode.transform {
+  border-color: #9932cc;
+  color: #9932cc !important;
+}
+
+.flowdesigner .reactflow-wrapper {
+  flex-grow: 1;
+  height: calc(100% - 64px);
+  margin-top: 64px;
+}
+
+.padded {
+  padding: 5px;
+}
+
+.nodepaper {
+  height: calc(100% - 1px) !important;
+  width: calc(100% - 1px) !important;
+}
+
+.columngrid {
+  /* background-color: #f3f8ff; */
+  border: #e4e4e4 solid 1px;
+  border-radius: 27px;
+  margin: 5px -32px 10px -32px;
+  padding: 2px;
+  width: calc(100% + 64px) !important;
+  background: #ffffff;
+}
+
+.tablecolhandlesource {
+  right: -32px !important;
+  background: #777 !important;
+}
+
+.tablecolhandletarget {
+  left: -32px !important;
+  background: #777 !important;
+}
+
+.nodeinput {
+  margin: 5px !important;
+  width: calc(100% - 10px) !important;
+}
+
+.nodeinputhalf {
+  margin: 5px !important;
+  width: calc(50% - 10px) !important;
+}
+
+.nodeinputgrow {
+  margin: 5px !important;
+  flex: 1;
+}
+
+.react-flow__node {
+  /* padding: 10px; */
+  border-radius: 5px;
+  width: 398px !important;
+  font-size: 12px;
+  color: #222;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  background: #ffffff;
+}
+
+.react-flow__node-SourceNode {
+  border-color: #1670f7;
+}
+
+.react-flow__node-TargetNode {
+  border-color: #ff0072;
+}
+
+.react-flow__node-TransformNode {
+  border-color: #9932cc;
+}
+
+.react-flow__node-StagingNode {
+  border-color: #0c940c;
+}
+
+.node {
+  padding: 5px;
+}
+
+.selected {
+  border-width: 2px;
+}
+
+.formgroup {
+  padding-top: 10px;
+}
+
+.react-flow__handle {
+  height: 10px !important;
+  width: 10px !important;
+}
+
+.react-flow__minimap {
+  position: fixed !important;
+  z-index: 5 !important;
+  bottom: 10px !important;
+  right: 280px !important;
+}
+
+@media screen and (min-width: 768px) {
+  .flowdesigner {
+    flex-direction: row;
+  }
+
+  .flowdesigner aside {
+    /* width: 20%; */
+    max-width: 250px;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 768px) {
+  .react-flow__minimap {
+    visibility: hidden;
+  }
+}
+
+code,
+.code {
+  font-family: "Fira Code", monospace;
+}
+
+@supports (font-variation-settings: normal) {
+  code,
+  .code {
+    font-family: "Fira Code VF", monospace;
+  }
+}
