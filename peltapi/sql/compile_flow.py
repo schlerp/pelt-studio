@@ -8,8 +8,8 @@ from networkx import (
     all_simple_edge_paths,
     ancestors,
     descendants,
+    topological_sort,
 )
-from networkx.algorithms.dag import topological_sort
 from peltapi.exceptions import CreateScriptExists, SelectScriptExists
 from peltapi.persist.database import get_flows_collection, connect_db
 from peltapi.persist.schemas import (

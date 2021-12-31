@@ -3,3 +3,4 @@ hjson
 sqlalchemy
 motor
 jinja2
+networkx
