@@ -1,9 +1,17 @@
-from typing import List, Optional, Union
+from typing import List, Literal, Optional, Union
 import pydantic
 from pydantic.fields import Field
+from peltapi.utils import to_camel
 
 
-class DatabaseSchema(pydantic.BaseModel):
+class CamelModel(pydantic.BaseModel):
+    class Config:
+        alias_generator = to_camel
+        allow_population_by_field_name = True
+        orm_mode = True
+
+
+class DatabaseSchema(CamelModel):
     name: str
     system: str
     host: str
@@ -13,79 +21,119 @@ class DatabaseSchema(pydantic.BaseModel):
     password: str
 
 
-class SchemaSchema(pydantic.BaseModel):
+class SchemaSchema(CamelModel):
     name: str
     database: str
 
 
-class ColumnSchema(pydantic.BaseModel):
+class TableColumnSchema(CamelModel):
+    id: Optional[str]
     name: str
     datatype: str
     primary_key: Union[bool, None]
     nullable: Union[bool, None]
     unique: Union[bool, None]
+    materialised: bool
+
+
+class ColumnSchema(TableColumnSchema):
     table: Union[str, None]
     table_schema: Union[str, None] = Field(alias="schema")
     database: Union[str, None]
-    materialised: bool
 
 
-class TableColumnSchema(pydantic.BaseModel):
-    name: str
-    datatype: str
-    primary_key: Union[bool, None]
-    nullable: Union[bool, None]
-    unique: Union[bool, None]
-    materialised: bool
-
-
-class TableSchema(pydantic.BaseModel):
+class TableSchema(CamelModel):
+    id: Optional[str]
     name: str
     table_schema: Union[str, None] = Field(alias="schema")
     database: str
     columns: List[TableColumnSchema]
+    materialised: bool
 
 
-class TransformSchema(pydantic.BaseModel):
-    name: str
+class TransformSchema(CamelModel):
+    id: Optional[str]
     transform: str
     filter: str
 
 
-class LegacyNodeSchema(pydantic.BaseModel):
-    type: str
-    column: str
-    unique_id: str
-
-
-class FlowEdgeSchema(pydantic.BaseModel):
+class FlowEdgeSchema(CamelModel):
     source: str
-    sourceHandle: str
     target: str
-    targetHandle: str
-    id: str
-    type: str
+    # source: str
+    # sourceHandle: str
+    # target: str
+    # targetHandle: str
+    # id: str
+    # type: str
 
 
-class NodePositionSchema(pydantic.BaseModel):
+class NodePositionSchema(CamelModel):
     x: float
     y: float
 
 
-class NodeSchema(pydantic.BaseModel):
+class TableNodeSchema(TableSchema):
     id: str
     type: str
-    data: Union[LegacyNodeSchema, ColumnSchema, TransformSchema]
-    position: NodePositionSchema
+    top: float
+    left: float
 
 
-class FlowSchema(pydantic.BaseModel):
+class TransformNodeSchema(TransformSchema):
     id: str
-    elements: List[Union[NodeSchema, FlowEdgeSchema]]
-    position: List[float]
+    type: str
+    top: float
+    left: float
+
+
+class Position2D(CamelModel):
+    x: float
+    y: float
+
+
+class FlowSchema(CamelModel):
+    id: str
+    name: str
+    nodes: List[Union[TableNodeSchema, TransformNodeSchema]]
+    edges: List[FlowEdgeSchema]
+    pan: Position2D
     zoom: float
 
 
-class MetadataCreateResponse(pydantic.BaseModel):
+class MetadataCreateResponse(CamelModel):
     tables: List[TableSchema]
     columns: List[ColumnSchema]
+
+
+class FlowTransformDefinition(TransformSchema):
+    source_col: TableColumnSchema
+
+
+class ColumnDataPath(CamelModel):
+    source_column: str
+    target_column: str
+    filter_condition: str
+    source_table: str
+    target_table: str
+
+
+class SourceTargetColumnPairs(CamelModel):
+    source: str
+    target: str
+
+
+class InsertTemplateContext(CamelModel):
+    flow_name: str
+    target_table_id: str
+    target_table_name: str
+    source_table_name: str
+    column_names: List[SourceTargetColumnPairs]
+    filter_conditions: List[str]
+
+
+class ETLScriptFragment(CamelModel):
+    create_script: Union[str, None]
+    insert_script: Union[str, None]
+    execution_order: int
+    append_only: bool = False

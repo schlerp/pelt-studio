@@ -2,3 +2,4 @@ fastapi
 hjson
 sqlalchemy
 motor
+jinja2

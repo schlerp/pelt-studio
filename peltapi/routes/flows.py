@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import Any, List, Union
 from fastapi import APIRouter
 from fastapi import Response
 
@@ -20,13 +20,13 @@ router = APIRouter()
 @router.get(
     "/flow",
     tags=["Flows"],
-    response_model=Union[List[schemas.FlowSchema], None],
+    # response_model=Union[List[schemas.FlowSchema], None],
     status_code=200,
 )
 async def api_get_all_flows(response: Response):
     """Get all defined flow definitions matching the filters and pagination."""
     flows_collection = await get_flows_collection()
-    return [x async for x in flows_collection.find()]
+    return [x async for x in flows_collection.find(projection={"_id": 0})]
 
 
 @router.post(
@@ -43,7 +43,9 @@ async def api_create_flow(flow: schemas.FlowSchema):
         replacement=flow.dict(),
         upsert=True,
     )
-    return await flows_collection.find_one(filter={"id": flow.id})
+    return await flows_collection.find_one(
+        filter={"id": flow.id}, projection={"_id": 0}
+    )
 
 
 @router.get(
@@ -55,7 +57,9 @@ async def api_create_flow(flow: schemas.FlowSchema):
 async def api_get_flow(flow_id: str):
     """Get a flow definition with the given name."""
     flows_collection = await get_flows_collection()
-    return await flows_collection.find_one(filter={"id": flow_id})
+    return await flows_collection.find_one(
+        filter={"id": flow_id}, projection={"_id": 0}
+    )
 
 
 @router.put(
@@ -70,12 +74,14 @@ async def api_update_flow(flow_id: str, flow: schemas.FlowSchema):
         return Response("flow object id and url do not match!", status_code=400)
 
     flows_collection = await get_flows_collection()
-    await flows_collection.update_one(
+    await flows_collection.replace_one(
         filter={"id": flow_id},
-        update=flow,
+        replacement=flow.dict(),
         upsert=True,
     )
-    return await flows_collection.find_one(filter={"id": flow_id})
+    return await flows_collection.find_one(
+        filter={"id": flow_id}, projection={"_id": 0}
+    )
 
 
 @router.delete(

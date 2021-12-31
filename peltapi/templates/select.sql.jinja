@@ -1,0 +1,13 @@
+-- ----------------------------------------------
+-- {{ flow_name }}
+-- ----------------------------------------------
+SELECT {% for col in columns %}
+    {{ col }}{% if not loop.last %},{% endif %}{% endfor %}
+FROM 
+    {{ table_name }}
+{% if where_clause -%}
+WHERE 
+    {{ where_clause }}
+{% endif %}
+;
+-- ----------------------------------------------

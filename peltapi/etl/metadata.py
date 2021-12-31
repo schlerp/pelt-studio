@@ -3,7 +3,7 @@ from sqlalchemy import MetaData
 from sqlalchemy.engine.base import Engine
 
 from peltapi.persist.database import get_tables_collection, get_columns_collection
-
+from peltapi.utils import safeid
 
 extract_metadata_sql = """
 SELECT DISTINCT
@@ -65,6 +65,7 @@ async def load_metadata(engine: Engine, database_id: str):
             )
             table_columns.append(table_column_dict)
         table_dict = dict(
+            id=safeid(),
             name=table.name,
             schema=table.schema,
             database=database_id,

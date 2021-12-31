@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="64"
+   height="64"
+   viewBox="0 0 16.933333 16.933334"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20, custom)"
+   sodipodi:docname="pelt_logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     showguides="false"
+     units="px"
+     width="64px"
+     inkscape:zoom="1.1421603"
+     inkscape:cx="215.8191"
+     inkscape:cy="203.12385"
+     inkscape:window-width="1920"
+     inkscape:window-height="1012"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;stroke:none;stroke-width:0.158123;stroke-linecap:round;stroke-linejoin:round"
+       id="rect846"
+       width="7.1298246"
+       height="12.477193"
+       x="0.89122808"
+       y="0" />
+    <circle
+       style="fill:#000000;stroke:none;stroke-width:0.168547;stroke-linecap:round;stroke-linejoin:round"
+       id="path1181"
+       cx="4.456141"
+       cy="12.477185"
+       r="3.5649123" />
+    <rect
+       style="fill:#000000;stroke:none;stroke-width:0.243801;stroke-linecap:round;stroke-linejoin:round"
+       id="rect1285"
+       width="8.912281"
+       height="3.5649123"
+       x="0"
+       y="0" />
+    <rect
+       style="fill:#000000;stroke:none;stroke-width:0.158123;stroke-linecap:round;stroke-linejoin:round"
+       id="rect846-5"
+       width="7.1298246"
+       height="12.477193"
+       x="8.912281"
+       y="-16.933332"
+       transform="rotate(90)" />
+    <rect
+       style="fill:#000000;stroke:none;stroke-width:0.243803;stroke-linecap:round;stroke-linejoin:round"
+       id="rect1285-3"
+       width="8.912281"
+       height="3.5649123"
+       x="8.0210524"
+       y="-16.933332"
+       transform="rotate(90)" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:0.0385321;stroke-linecap:round;stroke-linejoin:round"
+       d="m 7.8439928,8.1026127 c 6.35e-4,-0.5433494 0.00254,-0.9810506 0.0042,-0.9726699 0.00164,0.00838 0.00845,0.049523 0.015095,0.091426 0.070288,0.4429789 0.2997277,0.8862957 0.6280385,1.2134794 0.3502832,0.3490804 0.7900408,0.5665616 1.2955127,0.640692 0.073419,0.010766 -0.071256,0.012927 -0.9285292,0.013867 l -1.0154987,0.00111 z"
+       id="path2336" />
+  </g>
+</svg>

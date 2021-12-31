@@ -46,25 +46,24 @@ async def initialise_collections():
 
 async def close_db():
     """Close database connection."""
-    del db
     client.close()
 
 
-async def get_db_conf_collection():
+async def get_db_conf_collection() -> AsyncIOMotorCollection:
     return db_conf_collection
 
 
-async def get_flows_collection():
+async def get_flows_collection() -> AsyncIOMotorCollection:
     return flows_collection
 
 
-async def get_tables_collection():
+async def get_tables_collection() -> AsyncIOMotorCollection:
     return tables_collection
 
 
-async def get_columns_collection():
+async def get_columns_collection() -> AsyncIOMotorCollection:
     return columns_collection
 
 
-async def get_transforms_collection():
+async def get_transforms_collection() -> AsyncIOMotorCollection:
     return transforms_collection

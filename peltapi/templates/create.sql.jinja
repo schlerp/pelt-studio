@@ -1,0 +1,10 @@
+{# -- ------------------------------------
+-- flow:     {{ flow_name }}
+-- creating: {{ table_name }}
+-- ------------------------------------ #}
+CREATE TABLE {{ table_name }} (
+    {%- for col in columns %}
+    {{ col.name }} {{ col.datatype }} {%- if col.primary_key %} PRIMARY KEY{% endif %} {%- if col.unique %} UNIQUE{% endif %} {%- if not col.null %} NOT NULL{% endif %}{% if not loop.last %},{% endif %}{% endfor %}
+);
+{# -- ------------------------------------ #}
+

@@ -1,0 +1,16 @@
+{# -- ------------------------------------
+-- flow:      {{ flow_name }}
+-- inserting: {{ source_table_name }} 
+-- into:      {{ target_table_name }}
+-- ------------------------------------ #}
+INSERT INTO {{ target_table_name }} 
+    ({% for col in column_names %}{{ col["target"] }}{% if not loop.last %}, {% endif %}{% endfor %})
+SELECT 
+    {% for col in column_names %}{{ col["source"] }} AS {{ col["target"] }}{% if not loop.last %}, {% endif %}{% endfor %}
+FROM 
+    {{ source_table_name }}
+{% if filter_conditions %}WHERE 
+    {% for condition in filter_conditions %}{{ condition }}{% if not loop.last %} AND {% endif %}{% endfor %}
+{%- endif -%};
+{# -- ------------------------------------ #}
+

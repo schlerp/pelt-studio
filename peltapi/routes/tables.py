@@ -59,35 +59,39 @@ async def api_get_table(table_id: str):
 
 
 @router.put(
-    "/table/{table_id}",
+    "/table/{table_name}",
     tags=["Tables"],
     response_model=schemas.TableSchema,
     status_code=200,
 )
-async def api_update_table(table_id: str, table: schemas.TableSchema):
+async def api_update_table(table_name: str, table: schemas.TableSchema):
     """Update a table definition with the given name."""
-    if table.name != table_id:
+    if table.name != table_name:
         return Response("table object name and url do not match!", status_code=400)
 
     tables_collection = await get_tables_collection()
-    await tables_collection.update_one(
-        filter={"name": table_id},
-        update=table,
+    await tables_collection.replace_one(
+        filter={"name": table_name},
+        replacement=table.dict(),
         upsert=True,
     )
-    return await tables_collection.find_one(filter={"name": table_id})
+    return await tables_collection.find_one(filter={"name": table_name})
 
 
 @router.delete(
-    "/table/{table_id}",
+    "/table/{table_name}",
     tags=["Tables"],
     response_model=bool,
     status_code=200,
 )
-async def api_delete_table(table_id: str):
+async def api_delete_table(table_name: str):
     """Delete a table definition with the given name."""
     tables_collection = await get_tables_collection()
-    result = await tables_collection.delete_one(filter={"name": table_id})
+    result = await tables_collection.delete_one(filter={"name": table_name})
     if result.deleted_count:
-        return Response(f"table config {table_id} deleted!")
-    return Response(f"no table config {table_id} to delete!", status_code=400)
+        return Response(f"table config {table_name} deleted!", media_type="text/plain")
+    return Response(
+        f"no table config {table_name} to delete!",
+        status_code=400,
+        media_type="text/plain",
+    )

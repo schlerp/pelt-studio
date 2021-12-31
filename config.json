@@ -1,14 +1,14 @@
 {
-    "title": "peltstudio",
-    "description": "The back end api of the pelt studio processing engine.",
-    "version": "0.0.1",
-    "database_url": "sqlite:///app.db",
-    "mongo_host": "127.0.0.1",
-    "mongo_port": 27017,
-    "metadata_database": "metadata",
-    "flows_collection": "flows",
-    "db_conf_collection": "databases",
-    "tables_collection": "tables",
-    "columns_collection": "columns",
-    "transforms_collection": "transforms"
+  "title": "peltstudio",
+  "description": "The back end api of the pelt studio processing engine.",
+  "version": "0.0.1",
+  "database_url": "sqlite:///app.db",
+  "mongo_host": "127.0.0.1",
+  "mongo_port": 27017,
+  "metadata_database": "metadata",
+  "flows_collection": "flows",
+  "db_conf_collection": "databases",
+  "tables_collection": "tables",
+  "columns_collection": "columns",
+  "transforms_collection": "transforms"
 }
