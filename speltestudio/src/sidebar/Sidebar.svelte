@@ -3,6 +3,7 @@
   import { Resource } from "../services/client";
   import { onMount } from "svelte";
   import { flowStore } from "../store";
+  import { currentFlowStore } from "../flowCanvas/canvasStore";
   import type { IFlowDefinition } from "../flowCanvas/types";
   import ButtonControl from "../flowCanvas/controls/ButtonControl.svelte";
   import { loadFlow } from "../flowCanvas/utils/canvasUtils";
@@ -16,7 +17,9 @@
   let flows: IFlowDefinition[];
 
   flowStore.subscribe((serverFlows) => {
-    flows = serverFlows;
+    flows = serverFlows.sort((a, b) => {
+      return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+    });
   });
 
   onMount(() => {
@@ -34,16 +37,28 @@
     <span><FlowIcon />New Flow</span>
   </ButtonControl>
   <h3>Existing Flows</h3>
-  {#each flows as flow}
-    <ButtonControl
-      variant="transparent"
-      handleClick={(e) => {
-        loadFlow(flow);
-        // console.log("setting flow", flow);
-      }}
-    >
-      <span><FlowIcon />{flow.name}</span>
-    </ButtonControl>
+  {#each flows as flow (flow.id)}
+    {#if flow.id === $currentFlowStore.id}
+      <ButtonControl
+        variant="primary"
+        handleClick={(e) => {
+          loadFlow(flow);
+          // console.log("setting flow", flow);
+        }}
+      >
+        <span><FlowIcon />{flow.name}</span>
+      </ButtonControl>
+    {:else}
+      <ButtonControl
+        variant="transparent"
+        handleClick={(e) => {
+          loadFlow(flow);
+          // console.log("setting flow", flow);
+        }}
+      >
+        <span><FlowIcon />{flow.name}</span>
+      </ButtonControl>
+    {/if}
   {/each}
 </div>
 

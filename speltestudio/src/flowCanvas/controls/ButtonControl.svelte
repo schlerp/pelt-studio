@@ -41,6 +41,7 @@
   }
   .warning {
     background-color: var(--pal-warning);
+    color: var(--pal-text);
   }
   .danger {
     background-color: var(--pal-error);

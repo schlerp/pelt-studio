@@ -9,6 +9,7 @@ import {
   currentFlowStore,
   jsPlumbInstanceStore,
   refreshStore,
+  createJsPlumbInstance,
 } from "../canvasStore";
 import { safeid } from "./safeid";
 import { tick } from "svelte";
@@ -35,36 +36,36 @@ export async function compileCurrentFlow() {
 }
 
 export async function loadFlow(flow: IFlowDefinition) {
-  jsPlumbInstance.deleteEveryConnection();
+  createJsPlumbInstance();
   refreshStore.set(flow.id);
   await tick();
   currentFlowStore.set(flow);
   await tick();
   jsPlumbInstance.repaintEverything();
-  console.debug(currentFlow.edges);
-  currentFlow.edges.forEach((edge) => {
-    if (
-      jsPlumbInstance.connections.filter((c) => {
-        return c.sourceId === edge.source && c.targetId === edge.target;
-      }).length < 1
-    ) {
-      const sourceElement = document.getElementById(edge.source);
-      const sourceEndpoint = jsPlumbInstance
-        .getEndpoints(sourceElement)
-        .find((ep) => {
-          return ep.isSource === true;
-        });
-      const targetElement = document.getElementById(edge.target);
-      const targetEndpoint = jsPlumbInstance
-        .getEndpoints(targetElement)
-        .find((ep) => {
-          return ep.isTarget === true;
-        });
-      jsPlumbInstance.connect({
-        source: sourceEndpoint,
-        target: targetEndpoint,
+  flow.edges.forEach((edge) => {
+    // if (
+    //   jsPlumbInstance.connections.filter((c) => {
+    //     return c.sourceId === edge.source && c.targetId === edge.target;
+    //   }).length < 1
+    // ) {
+    const sourceElement = document.getElementById(edge.source);
+    const sourceEndpoint = jsPlumbInstance
+      .getEndpoints(sourceElement)
+      .find((ep) => {
+        return ep.isSource === true;
       });
-    }
+    const targetElement = document.getElementById(edge.target);
+    const targetEndpoint = jsPlumbInstance
+      .getEndpoints(targetElement)
+      .find((ep) => {
+        return ep.isTarget === true;
+      });
+    console.debug("connecting:", edge, sourceEndpoint, targetEndpoint);
+    jsPlumbInstance.connect({
+      source: sourceEndpoint,
+      target: targetEndpoint,
+    });
+    // }
   });
   jsPlumbInstance.repaintEverything();
 }

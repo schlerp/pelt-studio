@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { SvelteComponent } from "svelte/internal";
-  import type { BrowserJsPlumbInstance } from "@jsplumb/browser-ui";
   import Draggable from "./components/Draggable.svelte";
+  import type { INode } from "./types";
 
   export let id: string;
   export let top: number;
@@ -10,7 +10,7 @@
   export let content: string = undefined;
   export let footer: string = undefined;
   export let form: SvelteComponent = undefined;
-  export let formContext: Object = undefined;
+  export let formContext: INode = undefined;
 </script>
 
 <Draggable

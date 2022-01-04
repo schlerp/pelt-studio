@@ -1,4 +1,5 @@
 from typing import Dict, List, Union
+from fastapi.logger import logger
 from jinja2 import Environment, PackageLoader, select_autoescape
 from networkx import (
     DiGraph,
@@ -214,6 +215,7 @@ async def parse_flow(flow: FlowSchema):
     template_insert = env.get_template("insert.sql.jinja")
     insert_contexts = create_insert_into_contexts(flow, data_graph)
     for context in insert_contexts:
+        logger.debug(context)
         if insert_scripts.get(context.target_table_id):
             # raise SelectScriptExists
             pass

@@ -3,6 +3,7 @@
   import { EVENT_DRAG_MOVE } from "@jsplumb/browser-ui";
   import type { SvelteComponent } from "svelte/internal";
   import { jsPlumbInstanceStore } from "../canvasStore";
+  import type { INode } from "../types";
 
   export let id: string;
   export let top: number;
@@ -11,7 +12,7 @@
   export let content: string = undefined;
   export let footer: string = undefined;
   export let form: SvelteComponent = undefined;
-  export let formContext: Object = undefined;
+  export let formContext: INode = undefined;
 
   let element: HTMLDivElement;
 
@@ -53,6 +54,9 @@
       {#if footer !== undefined}
         {footer}
       {/if}
+      {#if formContext !== undefined}
+        {formContext.id}
+      {/if}
     </footer>
   {/if}
 </div>
@@ -61,13 +65,14 @@
   .draggableWrapper {
     position: absolute;
     background-color: white;
-    box-shadow: var(--spacing-small) var(--spacing-small) var(--spacing-small)
-      var(--pal-shadow);
+    /* box-shadow: var(--spacing-small) var(--spacing-small) var(--spacing-small)
+      var(--pal-shadow); */
     width: 350px;
     user-select: none;
     margin: var(--spacing);
     border-radius: var(--spacing);
     border: 2px solid var(--pal-border-hard);
+    cursor: grab;
   }
   header {
     padding: var(--spacing);
